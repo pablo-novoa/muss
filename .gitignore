@@ -45,6 +45,7 @@ wp-content/plugins/akismet/
 
 wp-content/themes/twenty*/
 wp-content/themes/*/style.css
+wp-content/themes/*/.sass-cache
 
 node_modules/
 bower_components/
