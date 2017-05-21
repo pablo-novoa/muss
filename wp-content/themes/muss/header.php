@@ -21,22 +21,24 @@
         <span class="grey_text" style="margin-left: -5px;">, l.w.</span>
       </a>
 
-      <?php
-			wp_nav_menu( array(
-				'theme_location'  => 'header-menu',
-				'container'       => 'nav',
-				'container_class' => 'main_nav',
-				'container_id'    => 'header_menu'
-			));
-			?>
-      <div class="header_right_box">
-        <span>redes</span class="grey_text"><span>:</span>
-        <?php if(get_theme_mod('facebook_setting')): ?>
-          <a href="<?= get_theme_mod('facebook_setting'); ?>" class="muss_comas" target="_blank">facebook</a>
-        <?php endif; ?>
-        <?php if(get_theme_mod('instagram_setting')): ?>
-          <a href="<?= get_theme_mod('instagram_setting'); ?>" class="muss_punto" target="_blank">instagram</a>
-        <?php endif; ?>
+      <div class="grid grid-noGutter grid-middle grid-spaceBetween col">
+        <?php
+  			wp_nav_menu( array(
+  				'theme_location'  => 'header-menu',
+  				'container'       => 'nav',
+  				'container_class' => 'main_nav',
+  				'container_id'    => 'header_menu'
+  			));
+  			?>
+        <div class="header_right_box">
+          <span>redes</span class="grey_text"><span>:</span>
+          <?php if(get_theme_mod('facebook_setting')): ?>
+            <a href="<?= get_theme_mod('facebook_setting'); ?>" class="muss_comas" target="_blank">facebook</a>
+          <?php endif; ?>
+          <?php if(get_theme_mod('instagram_setting')): ?>
+            <a href="<?= get_theme_mod('instagram_setting'); ?>" class="muss_punto" target="_blank">instagram</a>
+          <?php endif; ?>
+        </div>
       </div>
     </div>
 	</header>

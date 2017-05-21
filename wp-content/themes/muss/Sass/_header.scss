@@ -1,6 +1,7 @@
 #main_header{
     padding: 30px 0 15px 0;
     position: fixed;
+    top: 0;
     width: 100%;
     background-color: $greyBg;
     transition: all 0.3s;
@@ -51,8 +52,9 @@
         & > li:last-child a{ @include mussComas('.'); }
       }
     }
-
 }
+
+.admin-bar #main_header{ top: 32px;}
 
 #main_header.scrolled{
     -webkit-filter: invert(100%);
