@@ -14,7 +14,7 @@
 
 <body <?php body_class(''); ?>>
 
-  <header class="main_header">
+  <header id="main_header">
     <div class="grid grid-noGutter grid-middle col main_wrapp">
       <a href="/" class="header_logo">
         <span class="logo_text">muss</span>
