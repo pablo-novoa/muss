@@ -1,0 +1,48 @@
+.main_header{
+    padding: 30px 0 15px 0;
+
+    .header_box{
+    	display: -webkit-flex;
+    	display: flex;
+    	-webkit-align-items: baseline;
+    	align-items: baseline;
+    	-webkit-justify-content: space-between;
+    	justify-content: space-between;
+
+    	padding: 30px 0 15px 0;
+    }
+
+    .header_logo{
+    	line-height: 1em;
+    	text-decoration: none !important;
+    	&:hover{
+    		text-decoration: none;
+    	}
+
+    	.logo_text{
+    		font-size: 4rem;
+    	}
+    	.grey_text{
+    		font-size: 3rem;
+    	}
+    }
+
+    .main_nav{
+    	-webkit-flex: 1; /* Safari 6.1+ */
+      -ms-flex: 1; /* IE 10 */
+      flex: 1;
+      padding: 0 30px;
+      ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        li{ padding: 0 5px; }
+        a{
+          @include mussComas(',');
+        }
+        & > li:last-child a{ @include mussComas('.'); }
+      }
+    }
+
+}

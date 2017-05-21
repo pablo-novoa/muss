@@ -1,0 +1,53 @@
+
+html{
+  font-size: 10px;
+}
+html, body{
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+body{
+  font-family: 'Futura';
+	background: $greyBg;
+	font-size: $fontSize_base;
+}
+
+a{
+	color: $black;
+  text-decoration: none;
+	&:hover, &:focus{
+		color: $greyColor;
+    text-decoration: underline;
+	}
+}
+
+.grey_text{
+	font-family: 'Playfair_Display';
+	font-weight: bold;
+	color: $greyColor;
+}
+
+.muss_comas{ @include mussComas(','); }
+.muss_punto{ @include mussComas('.'); }
+
+.logo_text{
+	font-family: 'Century_Gothic';
+	font-weight: bold;
+	color: $black;
+}
+
+
+.main_wrapp{
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto !important;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+.textCenter{
+  text-align: center;
+}

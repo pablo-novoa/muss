@@ -1,0 +1,22 @@
+$greyBg: #e9e8e8;
+$greyColor: #928a81;
+
+$black: #231f20;
+
+$fontSize_base: 16px;
+
+
+
+/*
+Mixins
+*/
+
+@mixin mussComas($char: ',', $size: 1em) {
+  &::after{
+    content: $char;
+    font-family: 'Playfair_Display';
+    font-weight: bold;
+    color: $greyColor;
+    font-size: $size;
+  }
+}
