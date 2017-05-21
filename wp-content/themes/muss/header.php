@@ -31,10 +31,14 @@
 			?>
       <div class="header_right_box">
         <span>redes</span class="grey_text"><span>:</span>
-        <a href="https://www.facebook.com/mussleathers/?fref=ts" class="muss_comas" target="_blank">facebook</a>
-        <a href="https://www.instagram.com/mussleathers/?hl=es" class="muss_punto" target="_blank">instagram</a>
+        <?php if(get_theme_mod('facebook_setting')): ?>
+          <a href="<?= get_theme_mod('facebook_setting'); ?>" class="muss_comas" target="_blank">facebook</a>
+        <?php endif; ?>
+        <?php if(get_theme_mod('instagram_setting')): ?>
+          <a href="<?= get_theme_mod('instagram_setting'); ?>" class="muss_punto" target="_blank">instagram</a>
+        <?php endif; ?>
       </div>
     </div>
 	</header>
 
-  <main class="main_wrapp">
+  <main id="mainContainer" class="main_wrapp">

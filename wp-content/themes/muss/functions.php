@@ -63,3 +63,33 @@ function muss_sidebar_register() {
 	) );
 
 }}
+
+
+
+/**
+ * Theme custom settings
+ */
+add_action('customize_register', 'muss_theme_settings');
+function muss_theme_settings($wp_customize){
+   //Redes
+  $wp_customize->add_section('muss_social_settings', array(
+    'title'          => 'muss - Redes Sociales'
+   ));
+  $wp_customize->add_setting('facebook_setting', array(
+   'default'        => '',
+   ));
+  $wp_customize->add_control('facebook_setting', array(
+   'label'   => 'Facebook',
+   'section' => 'muss_social_settings',
+   'type'    => 'url',
+  ));
+  $wp_customize->add_setting('instagram_setting', array(
+   'default'        => '',
+   ));
+  $wp_customize->add_control('instagram_setting', array(
+   'label'   => 'Instagram',
+   'section' => 'muss_social_settings',
+   'type'    => 'url',
+  ));
+
+}
