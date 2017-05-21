@@ -1,4 +1,21 @@
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 992px) {
+  #main_header{
+    .header_menu_wrap{
+      flex: 0 0 100%;
+    }
+    .main_nav{
+      padding-left: 0;
+    }
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  #main_header{
+    .header_right_box{
+      flex: 0 0 100%;
+    }
+  }
 
 }

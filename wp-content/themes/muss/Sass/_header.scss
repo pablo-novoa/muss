@@ -6,6 +6,8 @@
     background-color: $greyBg;
     transition: all 0.3s;
 
+
+
     .header_box{
     	display: -webkit-flex;
     	display: flex;
@@ -13,8 +15,16 @@
     	align-items: baseline;
     	-webkit-justify-content: space-between;
     	justify-content: space-between;
+      flex-wrap: wrap;
+    }
 
-    	padding: 30px 0 15px 0;
+    .header_menu_wrap{
+      flex: 1;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: space-between;
+    	justify-content: space-between;
+      flex-wrap: wrap;
     }
 
     .header_logo{
@@ -40,12 +50,15 @@
       -ms-flex: 1; /* IE 10 */
       flex: 1;
       padding: 0 30px;
+      flex-wrap: wrap;
       ul{
         list-style: none;
         padding: 0;
         margin: 0;
         display: flex;
-        li{ padding: 0 5px; }
+        flex-wrap: wrap;
+        li{ padding: 0 10px 0 0; }
+        li:last-child{ padding-right: 0; }
         a{
           @include mussComas(',');
         }

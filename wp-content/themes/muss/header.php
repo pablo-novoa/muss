@@ -15,13 +15,13 @@
 <body <?php body_class(''); ?>>
 
   <header id="main_header">
-    <div class="grid grid-noGutter grid-middle col main_wrapp">
+    <div class="main_wrapp header_box">
       <a href="/" class="header_logo">
         <span class="logo_text">muss</span>
         <span class="grey_text" style="margin-left: -5px;">, l.w.</span>
       </a>
 
-      <div class="grid grid-noGutter grid-middle grid-spaceBetween col">
+      <div class="header_menu_wrap">
         <?php
   			wp_nav_menu( array(
   				'theme_location'  => 'header-menu',
