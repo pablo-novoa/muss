@@ -5,9 +5,9 @@
   <meta charset="<?php bloginfo( 'charset' ); ?>">
   <meta name="viewport" content="width=device-width">
 
-  <meta name="theme-color" content="#333333">
-  <meta name="msapplication-navbutton-color" content="#333333">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#333333">
+  <meta name="theme-color" content="#231f20">
+  <meta name="msapplication-navbutton-color" content="#231f20">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#231f20">
 
   <title><?php wp_title('| '.bloginfo('name'), true, 'left'); ?></title>
   <link rel="icon" sizes="16x16 32x32" href="<?php echo get_theme_file_uri('img/favicon.png'); ?>">
