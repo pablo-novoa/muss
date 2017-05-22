@@ -7,8 +7,13 @@
     .main_nav{
       padding-left: 0;
     }
+    .menu_burguer{ display: block;}
   }
 
+}
+
+@media screen and (max-width: 782px) {
+  .admin-bar #main_header{ top: 46px;}
 }
 
 @media screen and (max-width: 768px) {
@@ -18,4 +23,8 @@
     }
   }
 
+}
+
+@media screen and (max-width: 600px) {
+  .admin-bar #main_header{ top: 0;}
 }

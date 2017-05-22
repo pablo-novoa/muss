@@ -12,6 +12,19 @@ add_action('after_setup_theme', 'muss_add_theme_support' );
 //svg format to media library
 add_filter('upload_mimes', 'cc_mime_types');
 
+add_filter( 'style_loader_src',  'sdt_remove_ver_css_js', 9999, 2 );
+add_filter( 'script_loader_src', 'sdt_remove_ver_css_js', 9999, 2 );
+
+function sdt_remove_ver_css_js( $src, $handle )
+{
+    $handles_with_version = [ 'style' ]; // <-- Adjust to your needs!
+
+    if ( strpos( $src, 'ver=' ) && ! in_array( $handle, $handles_with_version, true ) )
+        $src = remove_query_arg( 'ver', $src );
+
+    return $src;
+}
+
 
 if (!function_exists('cc_mime_types')) {
 function cc_mime_types($mimes) {
@@ -44,10 +57,10 @@ if (!function_exists('muss_enqueueu')) {
 function muss_enqueueu(){
 	//== css ==
   wp_enqueue_style( 'gridlex', 'https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.3.1/gridlex.min.css' );
-	wp_enqueue_style( 'muss-styles', get_theme_file_uri('style.css'), array('gridlex') );
+	wp_enqueue_style( 'muss-styles', get_theme_file_uri('style.css'), array('gridlex'), false );
 	//== js ==
   wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'scripts', get_theme_file_uri('js/scripts.js'), array('jquery') );
+	wp_enqueue_script( 'scripts', get_theme_file_uri('js/scripts.js'), array('jquery'), false );
 }}
 
 if (!function_exists('muss_sidebar_register')) {

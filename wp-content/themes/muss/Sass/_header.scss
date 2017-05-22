@@ -78,3 +78,43 @@
     }
 
 }
+
+
+.menu_burguer{
+	cursor: pointer;
+  position: relative;
+	width: 25px;
+  height: 25px;
+	opacity: .45;
+	transition: opacity 0.3s;
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  float: right;
+  display: none;
+	span{
+		display: block;
+		height: 4px;
+		width: 100%;
+		background-color: $black;
+		margin-bottom: 4px;
+    transition: all .3s;
+    &:last-child{ margin-bottom: 0; }
+	}
+	&:hover{
+		opacity: 1;
+	}
+
+  &.toggled{
+    span:nth-child(2){ display: none;}
+    span:first-child, span:last-child{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+    }
+    span:first-child{ transform: rotate(45deg); }
+    span:last-child{ transform: rotate(-45deg); }
+  }
+}
