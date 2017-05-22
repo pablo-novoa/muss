@@ -47,6 +47,17 @@
     font-style: italic;
 }
 
+@font-face {
+    font-family: 'Futura';
+    src: url('fonts/futura/FuturaStd-Heavy.otf');
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'Futura';
+    src: url('fonts/futura/FuturaStd-Light.otf');
+    font-weight: 300;
+}
+
 /* Playfair_Display */
 @font-face {
     font-family: 'Playfair_Display';

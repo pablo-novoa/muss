@@ -51,4 +51,7 @@
     </div>
 	</header>
 
-  <main id="mainContainer" class="main_wrapp">
+  <main id="mainContainer">
+    <div class="main_wrapp">
+
+    

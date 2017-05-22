@@ -11,6 +11,9 @@ add_action( 'widgets_init', 'muss_sidebar_register' );
 add_action('after_setup_theme', 'muss_add_theme_support' );
 //svg format to media library
 add_filter('upload_mimes', 'cc_mime_types');
+// widget Areas
+add_action( 'widgets_init', 'muss_widgets_areas' );
+
 
 add_filter( 'style_loader_src',  'sdt_remove_ver_css_js', 9999, 2 );
 add_filter( 'script_loader_src', 'sdt_remove_ver_css_js', 9999, 2 );
@@ -24,6 +27,56 @@ function sdt_remove_ver_css_js( $src, $handle )
 
     return $src;
 }
+
+if (!function_exists('muss_widgets_areas')){
+function muss_widgets_areas() {
+
+	register_sidebar( array(
+		'name'          => 'Footer 1',
+		'id'            => 'footer_1',
+		'before_widget' => '<div class="footer_widget_area">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="rounded">',
+		'after_title'   => '</h2>',
+	) );
+
+  register_sidebar( array(
+		'name'          => 'Footer 2',
+		'id'            => 'footer_2',
+		'before_widget' => '<div class="footer_widget_area">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="rounded">',
+		'after_title'   => '</h2>',
+	) );
+
+  register_sidebar( array(
+		'name'          => 'Footer 3',
+		'id'            => 'footer_3',
+		'before_widget' => '<div class="footer_widget_area">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="rounded">',
+		'after_title'   => '</h2>',
+	) );
+
+  register_sidebar( array(
+		'name'          => 'Footer 4',
+		'id'            => 'footer_4',
+		'before_widget' => '<div class="footer_widget_area">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="rounded">',
+		'after_title'   => '</h2>',
+	) );
+
+  register_sidebar( array(
+		'name'          => 'Footer 5',
+		'id'            => 'footer_5',
+		'before_widget' => '<div class="footer_widget_area">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="rounded">',
+		'after_title'   => '</h2>',
+	) );
+
+}}
 
 
 if (!function_exists('cc_mime_types')) {

@@ -40,11 +40,16 @@ a{
 
 #mainContainer{
   padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .main_wrapp{
   width: 100%;
   max-width: 1170px;
+  flex: 1;
   margin: 0 auto !important;
   padding-left: 15px;
   padding-right: 15px;
