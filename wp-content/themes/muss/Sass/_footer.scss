@@ -1,8 +1,16 @@
 footer#page_footer{
   padding: 30px 15px;
-  .footer_row{
+  .footer_content, .footer_widgets_wrapp{
     display: flex;
     justify-content: space-between;
+  }
+  .footer_widgets_wrapp{
+    flex: 1;
+  }
+  .footer_icon{
+    font-size: 6rem;
+    line-height: 4rem;
+    padding-right: 20px;
   }
 
   .footer_widget_area{
