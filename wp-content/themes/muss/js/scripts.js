@@ -6,7 +6,7 @@ jQuery(document).ready(function(){
 });
 
 function scrolledHeader(){
-  var changePoint = 90;
+  var changePoint = 50;
   var menuElement = jQuery('#main_header') || null;
   if(window.pageYOffset >= changePoint){
     if(menuElement){ menuElement.addClass('scrolled'); }
