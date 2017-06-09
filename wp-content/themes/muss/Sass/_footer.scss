@@ -3,6 +3,7 @@ footer#page_footer{
   .footer_content, .footer_widgets_wrapp{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   .footer_widgets_wrapp{
     flex: 1;
@@ -14,6 +15,7 @@ footer#page_footer{
   }
 
   .footer_widget_area{
+    margin: 0 5px 10px 5px;
     ul{
       list-style: none;
       padding: 0;
@@ -24,3 +26,4 @@ footer#page_footer{
   }
 
 }
+

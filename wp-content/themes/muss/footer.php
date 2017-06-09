@@ -1,4 +1,4 @@
-</div>
+
 
 <footer id="page_footer">
   <div class="main_wrapp footer_content">
