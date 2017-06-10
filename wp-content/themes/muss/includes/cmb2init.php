@@ -12,7 +12,7 @@ function muss_page_options(){
 	$muss_pageOptions = new_cmb2_box( array(
 		'id'            => PREFIX . 'pageTopBanner',
 		'title'         => __( 'Configuración de página ', 'cmb2' ),
-		'object_types'  => array('page'),
+		'object_types'  => array('page', 'post'),
 		'closed'     => true
 	) );
 

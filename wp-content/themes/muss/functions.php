@@ -93,7 +93,8 @@ function muss_add_theme_support(){
 	add_theme_support( 'custom-background');
 	//add html5 support for search forms, comment forms, comment lists, gallery, and caption
 	add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
-
+	//add woocomerce support
+	add_theme_support( 'woocommerce' );
 }}
 
 if (!function_exists('muss_register_menus')) {
@@ -170,3 +171,10 @@ function muss_hide_editor() {
         remove_post_type_support('page', 'editor');
     }
 }
+
+
+
+/**
+ * WooCommerce stuff
+ */
+
