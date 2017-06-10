@@ -39,6 +39,7 @@ wp-content/*
 !wp-content/mu-plugins/
 !wp-content/plugins/
 !wp-content/themes/
+!wp-content/languages/
 
 wp-content/plugins/hello.php
 wp-content/plugins/akismet/
