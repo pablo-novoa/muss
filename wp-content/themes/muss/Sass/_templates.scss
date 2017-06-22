@@ -1,4 +1,25 @@
 .contact_page_content{
 	display: flex;
 	justify-content: space-between;
+
+	.contact_coma{
+		text-align: center;
+		flex: 1;
+		max-width: 350px;
+		span{
+			font-size: 200px;
+		    display: inline-block;
+		    height: 136px;
+	        line-height: 44px;
+		}
+	}
+	.contact_title{
+		max-width: 350px;
+		line-height: 0.7em;
+		margin-right: 56px;
+	}
+	.contact_content{
+		flex: 1;
+	}
+
 }
