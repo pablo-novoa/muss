@@ -58,3 +58,11 @@
 
   <main id="mainContainer">
     
+<?php  
+
+
+
+$topBanner = get_post_meta( get_the_ID(), '_muss_pageTopBanner', true );
+$GLOBALS['topBanner'] = $topBanner;
+
+?>

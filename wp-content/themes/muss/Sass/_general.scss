@@ -23,6 +23,14 @@ a{
 	}
 }
 
+ul{
+  list-style: inside;
+  padding-left: 0;
+  li{
+    margin-bottom: 10px;
+  }
+}
+
 .grey_text{
 	font-family: 'Playfair_Display';
 	font-weight: bold;

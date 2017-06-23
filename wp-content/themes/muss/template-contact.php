@@ -4,14 +4,16 @@
  */ 
 get_header(); 
 
-$topBannerImg = get_post_meta( get_the_ID(), '_muss_pageTopBanner_img', true );
+global $topBanner;
 
 ?>
 
-<?php if($topBannerImg): ?>
+<?php if($topBanner && count($topBanner) == 1 && $topBanner[0]['_muss_pageTopBanner_img']): ?>
 <section class="muss_page_top_banner">
-	<img src="<?= $topBannerImg; ?>" />
+	<img src="<?= $topBanner[0]['_muss_pageTopBanner_img']; ?>" />
 </section>
+<?php elseif($topBanner && count($topBanner) > 1): ?>
+<!--// banner //-->
 <?php endif; ?>
 
 <div class="main_wrapp">
