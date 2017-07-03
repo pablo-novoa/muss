@@ -22,6 +22,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header( 'shop' ); ?>
 
+<div class="main_wrapp">
+	<div class="page_wrapp archive_product_wrapp page_with_sidebar">
+
+
+
+		<aside class="sidebar">
+		<?php dynamic_sidebar( 'product_sidebar' ); ?>
+		</aside>
+		<section class="sidebar_page_content">
+	
+
 	<?php
 		/**
 		 * woocommerce_before_main_content hook.
@@ -32,6 +43,8 @@ get_header( 'shop' ); ?>
 		 */
 		do_action( 'woocommerce_before_main_content' );
 	?>
+	
+
 
     <header class="woocommerce-products-header">
 
@@ -124,7 +137,15 @@ get_header( 'shop' ); ?>
 		 *
 		 * @hooked woocommerce_get_sidebar - 10
 		 */
-		do_action( 'woocommerce_sidebar' );
+		//do_action( 'woocommerce_sidebar' );
 	?>
+
+		<!--//  end content section  //-->
+		</section>
+
+		<!--// end wrapers //-->
+	</div>
+</div>
+
 
 <?php get_footer( 'shop' ); ?>

@@ -46,3 +46,31 @@
     display: block;
     object-fit: contain;
 }
+
+.widget_price_filter{
+	
+	.price_slider_wrapper{
+		max-width: 215px;
+		.price_slider_amount{
+			display: flex;
+			flex-direction: row-reverse;
+			align-items: center;
+			justify-content: space-between;
+			button{
+				@include mussBtn();
+				line-height: 1.4em;
+				float: none;
+			}
+		}
+		.clear{ display: none; }
+	}
+	.price_slider_wrapper .ui-widget-content{
+		background-color: $black !important;
+	}
+
+	.ui-slider .ui-slider-range,
+	.ui-slider .ui-slider-handle{
+		background-color: $greyColor !important;
+	}
+
+}

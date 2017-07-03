@@ -1,16 +1,5 @@
 .muss_btn, button{
-	background: $black;
-	color: #fff;
-	border: none;
-	outline: none;
-	font-family: 'Futura';
-	font-size: $fontSize_base;
-	padding: 2px 10px;
-	opacity: 0.8;
-	&:hover{
-		opacity: 1;
-		cursor: pointer;
-	}
+	@include mussBtn();
 }
 
 input{

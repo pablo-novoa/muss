@@ -23,3 +23,31 @@
 	}
 
 }
+
+
+.page_with_sidebar{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.sidebar{
+	flex: 0 0 25%;
+    margin-right: 30px;
+    ul{
+    	margin: 0;
+    	list-style: none;
+    	padding-left: 15px;
+    }
+}
+.sidebar_page_content{
+	flex: 1;
+}
+.productSidebar_title{
+	margin: 0 0 20px 0;
+	text-decoration: underline;
+    font-weight: 400;
+    font-size: $fontSize_base;
+}
+.product_sidebar_widget{
+	margin-bottom: 33px;
+}

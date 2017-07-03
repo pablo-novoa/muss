@@ -32,6 +32,15 @@ if (!function_exists('muss_widgets_areas')){
 function muss_widgets_areas() {
 
 	register_sidebar( array(
+		'name'          => 'Sidebar Productos',
+		'id'            => 'product_sidebar',
+		'before_widget' => '<div  id="%1$s" class="widgetSidebar %2$s product_sidebar_widget" >',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4 class="productSidebar_title">',
+		'after_title'   => '</h4>',
+	) );
+
+	register_sidebar( array(
 		'name'          => 'Footer 1',
 		'id'            => 'footer_1',
 		'before_widget' => '<div class="footer_widget_area">',
