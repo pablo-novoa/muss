@@ -39,10 +39,27 @@ $prodLink = get_the_permalink();
 $prodTitle = get_the_title();
 
 $prodAttrs = [
-	'color' => $product->get_attribute( 'pa_color' ),
+	'color' => array(),
 	'size' => $product->get_attribute( 'pa_tamano' ),
 	'dimensiones' => $product->get_attribute( 'pa_dimensiones' )
 ];
+
+//color
+$product_colors = get_the_terms( $post, 'product_color' );
+$saved_colors = get_option( 'nm_taxonomy_colors' );
+if(isset($product_colors) && is_array($product_colors)){
+	foreach($product_colors as $color){
+		$term_id = $color->term_id;
+		$hex_code = $saved_colors[$term_id];
+
+		$colorData = array(
+			'name' => $color->name,
+			'code' => $hex_code,
+		);
+		array_push($prodAttrs['color'], $colorData);
+	}
+}
+
 
 ?>
 
@@ -56,26 +73,34 @@ $prodAttrs = [
 		<div class="prod_card_content">
 			<div class="muss_comillaBaja"></div>
 			<div class="prod_card_content_data">
-				<strong class="prod_card_title"><?= $prodTitle; ?></strong>
+				<a href="<?= get_permalink(); ?>">
+					<strong class="prod_card_title"><?= $prodTitle; ?></strong>
+				</a>
 				<div>
 					precio<span class="grey_text">:</span> 
 					<span class="grey_text">$</span>
 					<strong><?= $product->price; ?></strong>
 				</div>
+			<?php if(!empty($prodAttrs['dimensiones']) ): ?>
 				<div>
 					tamaño<span class="grey_text">:</span> 
 					<?= $prodAttrs['dimensiones']; ?>
 				</div>
+			<?php endif; ?>
+			<?php if(!empty($prodAttrs['color']) ): ?>
 				<div>
 					color<span class="grey_text">:</span> 
 					<?php  
-						/*foreach ($prodAttrs['color'] as $color) {
-							var_dump($color);
-						}*/
+						foreach ($prodAttrs['color'] as $color) {
+							echo '
+								<span class="colorRadio" style="background:'.$color['code'].';"></span>
+							';
+						}
 					?>
 				</div>
+			<?php endif; ?>
 			</div>
-			<div class="">+</div>
+			<a href="<?php echo $product->add_to_cart_url(); ?>" class="prod_card_addToCart">+</a>
 		</div>
 	</div>
 	<div class="muss_comas"></div>
