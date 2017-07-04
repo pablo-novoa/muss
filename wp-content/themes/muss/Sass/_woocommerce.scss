@@ -74,3 +74,64 @@
 	}
 
 }
+
+.muss_product_list{
+	display: flex;
+	list-style: none;
+	padding: 0;
+	width: 100%;
+	flex-wrap: wrap;
+
+	li{
+	    flex: 0 0 33%;
+	    display: flex;
+	    align-items: flex-end;
+
+	    & > .muss_comas{ font-size: 140px; }
+	}
+
+}
+
+.product_card{
+	position: relative;
+	height: 100%;
+	img{
+		height: 100%;
+		max-width: 100%;
+		width: 100%;
+		object-fit: contain;
+	}
+	.prod_card_content{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		border: solid 1px $black;
+		background-color: $greyBg;
+		transition: all 0.4s ease-in-out;
+		padding: 30px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-between;
+
+		//opacity: 0;
+
+		strong{
+			font-weight: 500;
+		}
+	}
+
+	&:hover .prod_card_content{
+		opacity: 1;
+	}
+
+	.muss_comillaBaja{
+		font-size: 110px;
+		line-height: 71px;
+	    margin-bottom: -52px;
+	}
+
+}

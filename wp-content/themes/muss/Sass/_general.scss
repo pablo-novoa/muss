@@ -39,6 +39,7 @@ ul{
 
 .muss_comas{ @include mussComas(','); }
 .muss_punto{ @include mussComas('.'); }
+.muss_comillaBaja{ @include mussComas('“'); }
 
 .logo_text{
 	font-family: 'Century_Gothic';
