@@ -16,4 +16,4 @@
  * @version     2.0.0
  */
 ?>
-<ul class="muss_product_list">
+<ul class="products">
