@@ -104,6 +104,10 @@ function muss_add_theme_support(){
 	add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
 	//add woocomerce support
 	add_theme_support( 'woocommerce' );
+
+	add_theme_support( 'wc-product-gallery-zoom' );
+	//add_theme_support( 'wc-product-gallery-lightbox' );
+	add_theme_support( 'wc-product-gallery-slider' );
 }}
 
 if (!function_exists('muss_register_menus')) {
@@ -187,3 +191,15 @@ function muss_hide_editor() {
  * WooCommerce stuff
  */
 
+
+
+
+add_action( 'woocommerce_before_single_product', mussSingleProductDetailsHooks, 10, 1 );
+function mussSingleProductDetailsHooks(){
+
+	remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
+	remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
+
+	add_action('woocommerce_single_product_summary', 'woocommerce_output_product_data_tabs', 40);
+
+}

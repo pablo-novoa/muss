@@ -123,14 +123,7 @@
 		strong{
 			font-weight: 500;
 		}
-		.colorRadio{
-			width: 10px;
-			height: 10px;
-			border-radius: 50%;
-			display: inline-block;
-			vertical-align: middle;
-			border: solid 1px $greyColor;
-		}
+		
 	}
 
 	&:hover .prod_card_content{
@@ -162,4 +155,26 @@
 		}
 	}
 
+}
+
+.colorRadio{
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	display: inline-block;
+	vertical-align: middle;
+	border: solid 1px $greyColor;
+}
+
+
+.woocommerce-product-gallery{
+
+	.woocommerce-product-gallery__wrapper{
+		margin: 0;
+	}
+
+	.flex-viewport{
+		border: solid 1px $black;
+		margin-bottom: 20px;
+	}
 }
