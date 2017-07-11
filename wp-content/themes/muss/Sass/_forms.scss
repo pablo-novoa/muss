@@ -2,12 +2,13 @@
 	@include mussBtn();
 }
 
-input{
+input, select{
 	background: transparent;
 	border: none;
 	border-bottom: solid 1px $black;
 	outline: none;
 	font-family: inherit;
+	
 }
 
 .newsletter_form{
@@ -15,3 +16,4 @@ input{
 		margin-top: 14px; 
 	}
 }
+

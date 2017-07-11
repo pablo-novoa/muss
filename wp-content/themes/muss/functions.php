@@ -124,7 +124,7 @@ if (!function_exists('muss_enqueueu')) {
 function muss_enqueueu(){
 	//== css ==
   //wp_enqueue_style( 'gridlex', 'https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.3.1/gridlex.min.css' );
-	wp_enqueue_style( 'muss-styles', get_theme_file_uri('style.css'), array(), false );
+	wp_enqueue_style( 'muss-styles', get_theme_file_uri('style.css'), array('tawcvs-frontend'), false );
 	//== js ==
   wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'scripts', get_theme_file_uri('js/scripts.js'), array('jquery'), false );

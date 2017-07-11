@@ -100,7 +100,7 @@ if(isset($product_colors) && is_array($product_colors)){
 				</div>
 			<?php endif; ?>
 			</div>
-			<a href="<?php echo $product->add_to_cart_url(); ?>" class="prod_card_addToCart">+</a>
+			<a href="<?= get_permalink(); ?>" class="prod_card_addToCart">+</a>
 		</div>
 	</div>
 	<div class="muss_comas"></div>

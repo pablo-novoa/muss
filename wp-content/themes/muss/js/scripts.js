@@ -1,5 +1,6 @@
 jQuery(document).ready(function(){
-  burguerInit()
+  burguerInit();
+  muss_prodColorSelect();
   //call menu scrolls
   scrolledHeader();
   jQuery(window).scroll(scrolledHeader);
@@ -39,6 +40,17 @@ function burguerInit(){
       }else{
         menu.hide();
       }
+  });
+
+}
+
+function muss_prodColorSelect(){
+  
+  if(jQuery('.swatch-color').length == 0){ return false; }
+
+  jQuery('.swatch-color').click(function(){
+    jQuery('.swatch-color').css('opacity', '0.5');
+    jQuery(this).css('opacity', '1');
   });
 
 }

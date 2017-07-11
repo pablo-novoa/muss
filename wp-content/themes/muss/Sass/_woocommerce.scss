@@ -157,15 +157,22 @@
 
 }
 
-.colorRadio{
-	width: 10px;
-	height: 10px;
-	border-radius: 50%;
-	display: inline-block;
-	vertical-align: middle;
-	border: solid 1px $greyColor;
+.colorRadio, .tawcvs-swatches .swatch-color{
+	width: 10px !important;
+	height: 10px !important;
+	border-radius: 50% !important;
+	display: inline-block !important;
+	vertical-align: middle !important;
+	border: solid 1px $greyColor !important;
+	opacity: 1;
+	position: relative;
+	margin-right: 10px;
+
+	&::before{ display: none!important; }
 }
 
+.tawcvs-swatches{ padding: 0; margin: 2px 0 10px 0;}
+.reset_variations{ display: none; }
 
 .woocommerce-product-gallery{
 
@@ -177,5 +184,28 @@
 		border: solid 1px $black;
 		margin-bottom: 20px;
 	    cursor: move;
+	}
+}
+
+.woocommerce div.product form.cart div.quantity{
+	float: none !important;
+	margin: 15px 0;
+}
+
+/**
+ * carrito resumen
+ */
+
+dl.variation{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+
+	dt{
+		margin-right: 10px;
+	}
+
+	dd{
+		flex: 1;
 	}
 }
