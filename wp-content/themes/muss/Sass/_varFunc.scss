@@ -41,5 +41,14 @@ Mixins
 	&:hover{
 		opacity: 1;
 		cursor: pointer;
+		text-decoration: none; 
+		color: #fff;
+	}
+
+	&.mediumSize{ padding: 10px 20px; }
+
+	&[disabled]{ 
+		opacity: 0.2; 
+		cursor: not-allowed;
 	}
 }

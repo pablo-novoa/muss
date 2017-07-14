@@ -209,3 +209,15 @@ dl.variation{
 		flex: 1;
 	}
 }
+
+
+.woocommerce a.button{
+	@include mussBtn();
+	padding: 10px 20px;
+}
+
+.woocommerce a.remove{
+	font-size: 1.5em;
+	height: 1.1em;
+	width: 1.1em;	
+}
