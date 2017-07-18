@@ -89,6 +89,10 @@
 	    align-items: flex-end;
 
 	    & > .muss_comas{ font-size: 140px; }
+
+	    &:last-child .muss_comas::after{
+	    	content: ";";
+	    }
 	}
 
 }
@@ -211,7 +215,7 @@ dl.variation{
 }
 
 
-.woocommerce a.button{
+.woocommerce a.button, .woocommerce input.button{
 	@include mussBtn();
 	padding: 10px 20px;
 }

@@ -10,6 +10,10 @@
     .menu_burguer{ display: block;}
   }
 
+  .muss_product_list li{
+    flex: 0 0 50%;
+  }
+
 }
 
 @media screen and (max-width: 782px) {
@@ -23,8 +27,70 @@
     }
   }
 
+  .page_with_sidebar{
+    flex-direction: column-reverse;
+  }
+  .sidebar{
+    flex: 0 0 100%;
+    margin-right: 0;
+    margin-top: 40px;
+    width: 100%;
+  }
+  .sidebar_page_content{
+    max-width: 100%;
+  }
+
+  .contact_page_content{
+    display: block;
+    .contact_coma, .contact_title{
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .contact_coma{
+      margin-left: -10px;
+    }
+    .contact_content{
+      margin-top: 30px;
+    }
+  }
+
 }
 
 @media screen and (max-width: 600px) {
   .admin-bar #main_header{ top: 0;}
+}
+
+@media screen and (max-width: 480px) {
+  #homeProdList .product_list_widget li{
+    flex: 1 1 100%;
+  }
+  footer#page_footer .footer_content,
+  footer#page_footer .footer_widgets_wrapp{
+    display: block;
+  }
+
+  footer#page_footer .footer_icon{
+    margin-bottom: 35px;
+  }
+  footer#page_footer{
+    padding: 0;
+  }
+
+  .muss_product_list{
+    flex-direction: column;
+  }
+
+  .contact_page_content{
+    .contact_content{
+      margin-top: 0;
+    }
+    .contact_coma{
+      display: none;
+    }
+    .contact_title{
+      font-size: 40px;
+      .grey_text{ display: none; }
+    }
+  } 
+
 }
