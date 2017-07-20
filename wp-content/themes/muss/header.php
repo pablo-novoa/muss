@@ -22,8 +22,11 @@
   <header id="main_header">
     <div class="main_wrapp header_box">
       <a href="/" class="header_logo">
+        <!--
         <span class="logo_text">muss</span>
         <span class="grey_text" style="margin-left: -5px;"> , l.w.</span>
+        -->
+        <img src="<?= get_theme_file_uri('img/logo.svg'); ?>" class="logo_img" width="auto" height="35"/>
       </a>
 
       <div>
@@ -51,6 +54,21 @@
           <?php if(get_theme_mod('instagram_setting')): ?>
             <a href="<?= get_theme_mod('instagram_setting'); ?>" class="muss_punto" target="_blank">instagram</a>
           <?php endif; ?>
+
+          <?php if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+           
+              $count = WC()->cart->cart_contents_count;
+              ?>
+
+              <a href="<?php echo WC()->cart->get_cart_url(); ?>" class="cartButton">
+              <?php if ( $count > 0 ): ?>
+                <img src="<?= get_theme_file_uri('img/cart_items.svg'); ?>" class="cart_items_img" width="auto" height="35"/>
+              <?php endif; ?>
+                <img src="<?= get_theme_file_uri('img/cart.svg'); ?>" class="cart_img" width="auto" height="35"/>
+              </a>
+           
+          <?php } ?>
+
         </div>
       </div>
     </div>
