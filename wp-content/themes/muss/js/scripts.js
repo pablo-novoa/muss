@@ -1,6 +1,7 @@
 jQuery(document).ready(function(){
   burguerInit();
   muss_prodColorSelect();
+  bxSlider_init();
   //call menu scrolls
   scrolledHeader();
   jQuery(window).scroll(scrolledHeader);
@@ -55,4 +56,10 @@ function muss_prodColorSelect(){
 
 }
 
+
+function bxSlider_init(){
+  jQuery('.bxslider').bxSlider({
+    pager: false
+  });
+}
 

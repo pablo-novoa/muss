@@ -10,7 +10,11 @@ global $topBanner;
 	<img src="<?= $topBanner[0]['_muss_pageTopBanner_img']; ?>" />
 </section>
 <?php elseif($topBanner && count($topBanner) > 1): ?>
-<!--// banner //-->
+	<ul class="bxslider">
+		<?php foreach ($topBanner as $bannerImg): ?>
+	  		<li><img src="<?= $bannerImg['_muss_pageTopBanner_img'] ?>" /></li>
+		<?php endforeach; ?>
+	</ul>
 <?php endif; ?>
 
 <div class="main_wrapp">
