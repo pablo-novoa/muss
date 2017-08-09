@@ -59,7 +59,9 @@ function muss_prodColorSelect(){
 
 function bxSlider_init(){
   jQuery('.bxslider').bxSlider({
-    pager: false
+    pager: false,
+    //auto: true,
+    //pause: 3700
   });
 }
 

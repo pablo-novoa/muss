@@ -17,6 +17,10 @@
     flex: 0 0 50%;
   }
 
+  #homeProdList .product_list_widget{
+    padding: 0 0 32px 0;
+  }
+
 }
 
 @media screen and (max-width: 782px) {
@@ -95,5 +99,15 @@
       .grey_text{ display: none; }
     }
   } 
+
+  .bx-viewport{
+    min-height: 400px;
+    background: red;
+    
+    img{
+      height: 400px;
+      object-fit: cover;
+    }
+  }
 
 }
