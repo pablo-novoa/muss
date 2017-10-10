@@ -67,6 +67,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 
 	</div><!-- .summary -->
+	<div class="single_prod_content_wrapp">
+		<?php the_content(); ?>
+	</div>
 
 	<?php
 		/**

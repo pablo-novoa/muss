@@ -85,6 +85,9 @@
 
   .muss_product_list{
     flex-direction: column;
+    li{
+      flex: 0 1 auto;
+    }
   }
 
   .contact_page_content{

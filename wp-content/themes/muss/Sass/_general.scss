@@ -79,3 +79,24 @@ ul{
     min-height: 400px;
   }
 }
+
+
+
+.pagination{
+  
+  .page-numbers{
+    padding: 5px 4px;
+    &.current{
+      color: $greyColor;
+    }
+    &.prev, &.next{
+      font-size: 1.2em;
+    }
+
+  }
+  .nav-links{
+    display: flex;
+        align-items: baseline;
+        justify-content: center;
+  }
+}

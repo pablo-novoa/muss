@@ -123,6 +123,14 @@ get_header( 'shop' ); ?>
 
 		<?php endif; ?>
 
+	<?php 
+		the_posts_pagination( array(
+		    'mid_size' => 2,
+		    'prev_text' => "«",
+		    'next_text' => "»",
+		    'screen_reader_text' => " "
+		) ); 
+	?>
 	<?php
 		/**
 		 * woocommerce_after_main_content hook.
@@ -131,6 +139,7 @@ get_header( 'shop' ); ?>
 		 */
 		do_action( 'woocommerce_after_main_content' );
 	?>
+
 
 	<?php
 		/**

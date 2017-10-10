@@ -56,6 +56,11 @@
 			flex-direction: row-reverse;
 			align-items: center;
 			justify-content: space-between;
+			.price_label{
+				display: flex;
+				flex-wrap: wrap;
+				.from{ margin-left: 4px; }
+			}
 			button{
 				@include mussBtn();
 				line-height: 1.4em;
@@ -260,4 +265,20 @@ dl.variation{
 	input{
 		font-size: 16px;
 	}
+}
+
+.woocommerce div.product div.summary{ margin-bottom: 10px; }
+.woocommerce div.product form.cart{ margin-bottom: 0; }
+.woocommerce div.product div.images { margin-bottom: 20px; }
+
+.single_prod_content_wrapp{
+    clear: both;
+	margin: 0 0 30px 0;
+
+	&::after, &::before{
+		content: "";
+		display: table;
+		clear: both;
+	}
+
 }
