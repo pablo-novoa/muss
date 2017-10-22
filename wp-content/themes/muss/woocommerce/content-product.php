@@ -66,7 +66,7 @@ if(isset($product_colors) && is_array($product_colors)){
 
 <li <?php post_class(); ?>>
 
-	<div class="product_card">
+	<div class="product_card" data-link="<?= get_permalink(); ?>">
 		<?php 
 			echo $prodThumb; 
 		?>

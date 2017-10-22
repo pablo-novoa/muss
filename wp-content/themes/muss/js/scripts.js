@@ -5,6 +5,7 @@ jQuery(document).ready(function(){
   //call menu scrolls
   scrolledHeader();
   jQuery(window).scroll(scrolledHeader);
+  prodLinks();
 });
 
 function scrolledHeader(){
@@ -65,3 +66,9 @@ function bxSlider_init(){
   });
 }
 
+function prodLinks(){
+  jQuery('.product_card').click(function(){
+    var link = jQuery(this).data('link');
+    window.location.href = link;
+  });
+}
