@@ -28,6 +28,9 @@
 }
 
 @media screen and (max-width: 768px) {
+  .product_card:hover .prod_card_content{
+    opacity: 0;
+  }
   #main_header{
     .header_right_box{
       flex: 0 0 100%;
