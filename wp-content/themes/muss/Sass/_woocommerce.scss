@@ -283,3 +283,37 @@ dl.variation{
 	}
 
 }
+
+/**
+ * recet for slick carousel
+ */
+ .woocommerce div.product div.images .flex-control-thumbs li img{
+ 	height: 99px;
+ 	object-fit: contain;
+ }
+ .woocommerce div.product div.images{
+ 	max-width: 400px;
+ }
+
+ .product-gallery_carousel{
+	margin-bottom: 40px;
+ }
+ 
+.woocommerce div.product div.images .flex-control-thumbs{
+	overflow: visible;
+	display: block;
+}
+
+.woocommerce div.product .woocommerce-product-gallery--columns-4 .flex-control-thumbs li:nth-child(4n+1){
+	clear: none;
+}
+.slick-dots{
+	li{
+		float: none !important;
+		width: auto !important;
+	}
+}
+.slick-prev:before, .slick-next:before{
+	color: $black;
+}
+/* end recet for slick carousel  */

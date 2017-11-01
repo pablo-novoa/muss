@@ -1,4 +1,5 @@
 
+
 @media screen and (max-width: 992px) {
   #main_header{
     .header_menu_wrap{
@@ -62,6 +63,10 @@
     .contact_content{
       margin-top: 30px;
     }
+  }
+  .product-gallery_carousel{
+    padding: 0 45px;
+    box-sizing: border-box;
   }
 
 }
