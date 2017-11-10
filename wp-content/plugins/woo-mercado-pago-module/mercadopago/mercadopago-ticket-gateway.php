@@ -20,6 +20,28 @@ class WC_WooMercadoPagoTicket_Gateway extends WC_Payment_Gateway {
 
 	public function __construct( $is_instance = false ) {
 
+		// Creating PHP version message.
+		$min_php_message = phpversion() >= WC_WooMercadoPago_Module::MIN_PHP ?
+			'<img width="14" height="14" src="' . plugins_url( 'images/check.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'Your PHP version is OK.', 'woocommerce-mercadopago-module' ) :
+			'<img width="14" height="14" src="' . plugins_url( 'images/error.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			sprintf(
+				__( 'Your PHP version do not support this module. You have %s, minimal required is %s.', 'woocommerce-mercadopago-module' ),
+				phpversion(), WC_WooMercadoPago_Module::MIN_PHP
+			);
+		// Check cURL.
+		$curl_message = in_array( 'curl', get_loaded_extensions() ) ?
+			'<img width="14" height="14" src="' . plugins_url( 'images/check.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'cURL is installed.', 'woocommerce-mercadopago-module' ) :
+			'<img width="14" height="14" src="' . plugins_url( 'images/error.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'cURL is not installed.', 'woocommerce-mercadopago-module' );
+		// Check SSL.
+		$is_ssl_message = empty( $_SERVER['HTTPS'] ) || $_SERVER['HTTPS'] == 'off' ?
+			'<img width="14" height="14" src="' . plugins_url( 'images/warning.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'SSL is missing in your site.', 'woocommerce-mercadopago-module' ) :
+			'<img width="14" height="14" src="' . plugins_url( 'images/check.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'Your site has SSL enabled.', 'woocommerce-mercadopago-module' );
+		
 		// Mercado Pago fields.
 		$this->mp = null;
 		$this->site_id = null;
@@ -45,7 +67,10 @@ class WC_WooMercadoPagoTicket_Gateway extends WC_Payment_Gateway {
 				plugin_dir_path( __FILE__ )
 			) . '"><br><br>' . '<strong>' .
 			__( 'This module enables WooCommerce to use Mercado Pago as payment method for purchases made in your virtual store.', 'woocommerce-mercadopago-module' ) .
-			'</strong>';
+			'</strong>' . '<br><br>' .
+			$min_php_message . '<br>' .
+			$is_ssl_message . '<br>' .
+			$curl_message;
 
 		// Fields used in Mercado Pago Module configuration page.
 		$this->access_token = $this->get_option( 'access_token' );
@@ -378,6 +403,8 @@ class WC_WooMercadoPagoTicket_Gateway extends WC_Payment_Gateway {
 				WC_WooMercadoPago_Module::get_module_version(),
 				$this->settings['access_token']
 			);
+			$email = ( wp_get_current_user()->ID != 0 ) ? wp_get_current_user()->user_email : null;
+			$this->mp->set_email( $email );
 		} else {
 			$this->mp = null;
 		}
@@ -661,6 +688,7 @@ class WC_WooMercadoPagoTicket_Gateway extends WC_Payment_Gateway {
 		$html = '<p>' .
 			__( 'Thank you for your order. Please, pay the ticket to get your order approved.', 'woocommerce-mercadopago-module' ) .
 		'</p>';
+		$html .= '<p><iframe src="' . $transaction_details . '" style="width:100%; height:1000px;"></iframe></p>';
 		$html .= '<a id="submit-payment" target="_blank" href="' .
 			$transaction_details . '" class="button alt"' .
 			' style="font-size:1.25rem; width:75%; height:48px; line-height:24px; text-align:center;">' .
@@ -735,9 +763,13 @@ class WC_WooMercadoPagoTicket_Gateway extends WC_Payment_Gateway {
 						__( 'Important: The order will be confirmed only after the payment approval.', 'woocommerce-mercadopago-module' ),
 					'febraban_rules' => __( 'Informações solicitadas em conformidade com as normas das circulares Nro. 3.461/09, 3.598/12 e 3.656/13 do Banco Central do Brasil.', 'woocommerce-mercadopago-module' ),
 					'select' => __( 'SELECT...', 'woocommerce-mercadopago-module' ),
+					'fisicalPerson' => __( 'Fisical Person', 'woocommerce-mercadopago-module' ),
+					'legalPerson' => __( 'Legal Person', 'woocommerce-mercadopago-module' ),
 					'name' => __( 'NAME', 'woocommerce-mercadopago-module' ),
+					'socialName' => __( 'SOCIAL NAME', 'woocommerce-mercadopago-module' ),
 					'surname' => __( 'SURNAME', 'woocommerce-mercadopago-module' ),
 					'docNumber' => __( 'DOCUMENT', 'woocommerce-mercadopago-module' ),
+					'docNumberLegal' => __( 'CNPJ', 'woocommerce-mercadopago-module' ),
 					'address' => __( 'ADDRESS', 'woocommerce-mercadopago-module' ),
 					'number' => __( 'NUMBER', 'woocommerce-mercadopago-module' ),
 					'city' => __( 'CITY', 'woocommerce-mercadopago-module' ),
@@ -841,6 +873,7 @@ class WC_WooMercadoPagoTicket_Gateway extends WC_Payment_Gateway {
 				if ( isset( $mercadopago_ticket['firstname'] ) && ! empty( $mercadopago_ticket['firstname'] ) &&
 					isset( $mercadopago_ticket['lastname'] ) && ! empty( $mercadopago_ticket['lastname'] ) &&
 					isset( $mercadopago_ticket['docNumber'] ) && ! empty( $mercadopago_ticket['docNumber'] ) &&
+					(strlen( $mercadopago_ticket['docNumber'] ) == 14 || strlen( $mercadopago_ticket['docNumber'] ) == 18) &&
 					isset( $mercadopago_ticket['address'] ) && ! empty( $mercadopago_ticket['address'] ) &&
 					isset( $mercadopago_ticket['number'] ) && ! empty( $mercadopago_ticket['number'] ) &&
 					isset( $mercadopago_ticket['city'] ) && ! empty( $mercadopago_ticket['city'] ) &&
@@ -1111,14 +1144,15 @@ class WC_WooMercadoPagoTicket_Gateway extends WC_Payment_Gateway {
 		// FEBRABAN rules.
 		if ( $this->site_id == 'MLB' ) {
 			$preferences['payer']['first_name'] = $ticket_checkout['firstname'];
-			$preferences['payer']['last_name'] = $ticket_checkout['lastname'];	
-			$preferences['payer']['identification']['type'] = 'CPF';
+			$preferences['payer']['last_name'] = strlen( $ticket_checkout['docNumber'] ) == 14 ? $ticket_checkout['lastname'] : $ticket_checkout['firstname'];
+			$preferences['payer']['identification']['type'] = strlen( $ticket_checkout['docNumber'] ) == 14 ? 'CPF' : 'CNPJ';
 			$preferences['payer']['identification']['number'] = $ticket_checkout['docNumber'];
 			$preferences['payer']['address']['street_name'] = $ticket_checkout['address'];
 			$preferences['payer']['address']['street_number'] = $ticket_checkout['number'];
 			$preferences['payer']['address']['neighborhood'] = $ticket_checkout['city'];
 			$preferences['payer']['address']['city'] = $ticket_checkout['city'];
 			$preferences['payer']['address']['federal_unit'] = $ticket_checkout['state'];
+			$preferences['payer']['address']['zip_code'] = $ticket_checkout['zipcode'];
 		}
 
 		// Do not set IPN url if it is a localhost.
@@ -1286,9 +1320,10 @@ class WC_WooMercadoPagoTicket_Gateway extends WC_Payment_Gateway {
 					'[add_discount_ticket] - ticket trying to apply discount...'
 				);
 			}
-
+			
 			$value = ( $mercadopago_ticket['discount'] ) /
 				( ( float ) $this->currency_ratio > 0 ? ( float ) $this->currency_ratio : 1 );
+
 			global $woocommerce;
 			if ( apply_filters(
 				'wc_mercadopagoticket_module_apply_discount',
@@ -1297,7 +1332,7 @@ class WC_WooMercadoPagoTicket_Gateway extends WC_Payment_Gateway {
 				$woocommerce->cart->add_fee( sprintf(
 					__( 'Discount for %s coupon', 'woocommerce-mercadopago-module' ),
 					esc_attr( $mercadopago_ticket['campaign']
-					) ), ( $value * -1 ), true
+					) ), ( $value * -1 ), false
 				);
 			}
 		}
@@ -1356,6 +1391,8 @@ class WC_WooMercadoPagoTicket_Gateway extends WC_Payment_Gateway {
 				WC_WooMercadoPago_Module::get_module_version(),
 				$this->access_token
 			);
+			$email = ( wp_get_current_user()->ID != 0 ) ? wp_get_current_user()->user_email : null;
+			$this->mp->set_email( $email );
 			$get_request = $this->mp->get( '/users/me?access_token=' . $this->access_token );
 
 			if ( isset( $get_request['response']['site_id'] ) ) {
@@ -1776,6 +1813,7 @@ class WC_WooMercadoPagoTicket_Gateway extends WC_Payment_Gateway {
 				);
 				break;
 			case 'cancelled':
+				$this->process_cancel_order_meta_box_actions( $order );
 				$order->update_status(
 					'cancelled',
 					'Mercado Pago: ' .

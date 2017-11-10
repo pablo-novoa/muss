@@ -20,6 +20,28 @@ class WC_WooMercadoPagoSubscription_Gateway extends WC_Payment_Gateway {
 
 	public function __construct() {
 
+		// Creating PHP version message.
+		$min_php_message = phpversion() >= WC_WooMercadoPago_Module::MIN_PHP ?
+			'<img width="14" height="14" src="' . plugins_url( 'images/check.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'Your PHP version is OK.', 'woocommerce-mercadopago-module' ) :
+			'<img width="14" height="14" src="' . plugins_url( 'images/error.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			sprintf(
+				__( 'Your PHP version do not support this module. You have %s, minimal required is %s.', 'woocommerce-mercadopago-module' ),
+				phpversion(), WC_WooMercadoPago_Module::MIN_PHP
+			);
+		// Check cURL.
+		$curl_message = in_array( 'curl', get_loaded_extensions() ) ?
+			'<img width="14" height="14" src="' . plugins_url( 'images/check.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'cURL is installed.', 'woocommerce-mercadopago-module' ) :
+			'<img width="14" height="14" src="' . plugins_url( 'images/error.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'cURL is not installed.', 'woocommerce-mercadopago-module' );
+		// Check SSL.
+		$is_ssl_message = empty( $_SERVER['HTTPS'] ) || $_SERVER['HTTPS'] == 'off' ?
+			'<img width="14" height="14" src="' . plugins_url( 'images/warning.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'SSL is missing in your site.', 'woocommerce-mercadopago-module' ) :
+			'<img width="14" height="14" src="' . plugins_url( 'images/check.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'Your site has SSL enabled.', 'woocommerce-mercadopago-module' );
+
 		// Mercado Pago fields.
 		$this->mp = null;
 		$this->site_id = null;
@@ -42,7 +64,10 @@ class WC_WooMercadoPagoSubscription_Gateway extends WC_Payment_Gateway {
 				plugin_dir_path( __FILE__ )
 			) . '"><br><br>' . '<strong>' .
 			__( 'This module enables WooCommerce to use Mercado Pago as payment method for purchases made in your virtual store.', 'woocommerce-mercadopago-module' ) .
-			'</strong>';
+			'</strong>' . '<br><br>' .
+			$min_php_message . '<br>' .
+			$is_ssl_message . '<br>' .
+			$curl_message;
 
 		// Fields used in Mercado Pago Module configuration page.
 		$this->client_id = $this->get_option( 'client_id' );
@@ -371,6 +396,8 @@ class WC_WooMercadoPagoSubscription_Gateway extends WC_Payment_Gateway {
 				$this->settings['client_id'],
 				$this->settings['client_secret']
 			);
+			$email = ( wp_get_current_user()->ID != 0 ) ? wp_get_current_user()->user_email : null;
+			$this->mp->set_email( $email );
 		} else {
 			$this->mp = null;
 		}
@@ -879,6 +906,8 @@ class WC_WooMercadoPagoSubscription_Gateway extends WC_Payment_Gateway {
 				$this->client_id,
 				$this->client_secret
 			);
+			$email = ( wp_get_current_user()->ID != 0 ) ? wp_get_current_user()->user_email : null;
+			$this->mp->set_email( $email );
 			$access_token = $this->mp->get_access_token();
 			$get_request = $this->mp->get( '/users/me?access_token=' . $access_token );
 
@@ -1424,6 +1453,7 @@ class WC_WooMercadoPagoSubscription_Gateway extends WC_Payment_Gateway {
 				);
 				break;
 			case 'cancelled':
+				$this->process_cancel_order_meta_box_actions( $order );
 				$order->update_status(
 					'cancelled',
 					'Mercado Pago: ' .

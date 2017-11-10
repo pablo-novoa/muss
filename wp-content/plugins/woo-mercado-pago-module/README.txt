@@ -4,7 +4,7 @@ Donate link: https://www.mercadopago.com.br/developers/
 Tags: ecommerce, mercadopago, woocommerce
 Requires at least: WooCommerce 2.6.x
 Tested up to: WooCommerce 3.0.0
-Stable tag: 2.2.11
+Stable tag: 2.2.16
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,7 +40,7 @@ You have two ways to install this module: from your WordPress Store, or by downl
 3. You should find the module read to be installed. Click install.
 
 = Manual Download =
-1. Get the module sources from a repository (<a href="https://github.com/mercadopago/cart-woocommerce/archive/master.zip">Github</a> or <a href="https://downloads.wordpress.org/plugin/woo-mercado-pago-module.2.2.11.zip">WordPress Plugin Directory</a>);
+1. Get the module sources from a repository (<a href="https://github.com/mercadopago/cart-woocommerce/archive/master.zip">Github</a> or <a href="https://downloads.wordpress.org/plugin/woo-mercado-pago-module.2.2.16.zip">WordPress Plugin Directory</a>);
 2. Unzip the folder and find "woo-mercado-pago-module" directory;
 3. Copy "woo-mercado-pago-module" directory to **[WordPressRootDirectory]/wp-content/plugins/** directory.
 
@@ -48,7 +48,7 @@ To confirm that your module is really installed, you can click in **Plugins** it
 
 = Configuration =
 1. On your store administration, go to **WooCommerce > Settings > Checkout** tab. In **Checkout Options**, you can find configurations for **Mercado Pago - Basic Checkout**, **Mercado Pago - Custom Checkout**, and **Mercado Pago - Ticket**.
-	* To get your **Client_id** and **Client_secret** for your country, you can go to: <a href="https://www.mercadopago.com/mla/account/credentials?type=basic">Argentina</a>, <a href="https://www.mercadopago.com/mlb/account/credentials?type=basic?type=basic">Brazil</a>, <a href="https://www.mercadopago.com/mlc/account/credentials?type=basic">Chile</a>, <a href="https://www.mercadopago.com/mco/account/credentials?type=basic">Colombia</a>, <a href="https://www.mercadopago.com/mlm/account/credentials?type=basic">Mexico</a>, <a href="https://www.mercadopago.com/mpe/account/credentials?type=basic">Peru</a>, <a href="https://www.mercadopago.com/mlu/account/credentials?type=basic">Uruguay</a>, and <a href="https://www.mercadopago.com/mlv/account/credentials?type=basic">Venezuela</a>.
+	* To get your **Client_id** and **Client_secret** for your country, you can go to: <a href="https://www.mercadopago.com/mla/account/credentials?type=basic">Argentina</a>, <a href="https://www.mercadopago.com/mlb/account/credentials?type=basic">Brazil</a>, <a href="https://www.mercadopago.com/mlc/account/credentials?type=basic">Chile</a>, <a href="https://www.mercadopago.com/mco/account/credentials?type=basic">Colombia</a>, <a href="https://www.mercadopago.com/mlm/account/credentials?type=basic">Mexico</a>, <a href="https://www.mercadopago.com/mpe/account/credentials?type=basic">Peru</a>, <a href="https://www.mercadopago.com/mlu/account/credentials?type=basic">Uruguay</a>, and <a href="https://www.mercadopago.com/mlv/account/credentials?type=basic">Venezuela</a>.
 	* And to get your **Public Key**/**Access Token** you can go to: <a href="https://www.mercadopago.com/mla/account/credentials?type=custom">Argentina</a>, <a href="https://www.mercadopago.com/mlb/account/credentials?type=custom">Brazil</a>, <a href="https://www.mercadopago.com/mlc/account/credentials?type=custom">Chile</a>, <a href="https://www.mercadopago.com/mco/account/credentials?type=custom">Colombia</a>, <a href="https://www.mercadopago.com/mlm/account/credentials?type=custom">Mexico</a>, <a href="https://www.mercadopago.com/mpe/account/credentials?type=custom">Peru</a>, <a href="https://www.mercadopago.com/mlu/account/credentials?type=custom">Uruguay</a>, and <a href="https://www.mercadopago.com/mlv/account/credentials?type=custom">Venezuela</a>.
 2. For the solutions **Mercado Pago - Basic Checkout**, **Mercado Pago - Custom Checkout**, and **Mercado Pago - Ticket**, you can:
 	* Enable/Disable your plugin, so you can allow specific solutions for your business;
@@ -95,6 +95,34 @@ Please, check our FAQ at: https://www.mercadopago.com.br/ajuda/
 4. `Plugin Options`
 
 == Changelog ==
+
+= v2.2.16 (23/10/2017) =
+* Bug fixes
+	- Fixed the absence of [zip_code] field in registered tickets for Brazil.
+
+= v2.2.15 (22/09/2017) =
+* Bug fixes
+	- Synchronizing Mercado Pago account when WooCommerce back-office cancels an order.
+* Improvements
+	- Added CNPJ document for brazilian tickets;
+	- Optimized error tracking.
+
+= v2.2.14 (14/09/2017) =
+* Bug fixes
+	- Fixed a bug in Ticket form related with inconsistent use of variables of Custom Checkout form;
+	- Not showing card issuer field for Chile as it is unnecessary.
+
+= v2.2.13 (28/08/2017) =
+* Bug fixes
+	- Fixing a bug in Custom Checkout, that wasn't showing the form.
+
+= v2.2.12 (14/08/2017) =
+* Improvements
+	- Improved layout alignment for custom checkout and tickets;
+	- Added a checklist for platform statuses of cURL, SSL and PHP verification;
+	- Added the ticket view after the checkout.
+* Bug fixes
+	- Fixed a bug that was locking inputs in ticket fields for Brazil.
 
 = v2.2.11 (24/07/2017) =
 * Improvements

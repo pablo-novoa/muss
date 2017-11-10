@@ -28,72 +28,89 @@ if ( ! defined( 'ABSPATH' ) ) {
 </div>
 
 <fieldset id="mercadopago-form" style="background:white;">
-	<div class="mp-box-inputs mp-line" id="mercadopago-form-coupon-ticket"
-		style="padding-right: 5px; padding-left: 5px;" >
-		<label for="couponCodeLabel">
-			<?php echo $form_labels['form']['coupon_of_discounts']; ?>
-		</label>
-		<div class="mp-box-inputs mp-col-65">
+
+	<!-- coupom -->
+	<div class="mp-box-inputs mp-line form-row" id="mercadopago-form-coupon-ticket" style="margin-bottom: 16px;" >
+		<div class="form-col-8">
+			<label for="couponCodeLabel"><?php echo $form_labels['form']['coupon_of_discounts']; ?></label>
 			<input type="text" id="couponCodeTicket" name="mercadopago_ticket[coupon_code]"
-			autocomplete="off" maxlength="24" />
- 		</div>
-		<div class="mp-box-inputs mp-col-10">
-			<div id="mp-separete-date"></div>
-		</div>
-		<div class="mp-box-inputs mp-col-25">
-			<input type="button" class="button" id="applyCouponTicket"
-			value="<?php echo $form_labels['form']['apply']; ?>">
-		</div>
-		<div class="mp-box-inputs mp-col-100 mp-box-message">
+				autocomplete="off" maxlength="24" style="margin-bottom: 8px;"/>
 			<span class="mp-discount" id="mpCouponApplyedTicket" ></span>
 			<span class="mp-error" id="mpCouponErrorTicket" ></span>
 		</div>
+		<div class="form-col-4">
+			<label >&nbsp;</label>
+			<input type="button" class="button" id="applyCouponTicket" value="<?php echo $form_labels['form']['apply']; ?>">
+		</div>
 	</div>
 
+	<!-- payment method -->
 	<div id="mercadopago-form-ticket" class="mp-box-inputs mp-line">
 		<div id="form-ticket">
+			<div class="form-row" style="margin-bottom:16px;">
+				<div class="form-col-1"> </div>
+				<div class="form-col-4">
+					<input type="radio" name="mercadopago_ticket[docType]" class="MPv1Ticket-docType"
+						id="MPv1Ticket-docType-fisica" value="CPF" style="width:24px; height:24px;" checked="checked">
+						<?php echo $form_labels["form"]["fisicalPerson"]; ?>
+					</input>
+				</div>
+				<div class="form-col-2"> </div>
+				<div class="form-col-4">
+					<input type="radio" name="mercadopago_ticket[docType]" class="MPv1Ticket-docType"
+						id="MPv1Ticket-docType-juridica" value="CNPJ" style="width:24px; height:24px;">
+						<?php echo $form_labels["form"]["legalPerson"]; ?>
+					</input>
+				</div>
+				<div class="form-col-1"> </div>
+			</div>
 			<div class="form-row">
-				<div class="form-col-4">
-					<label  for="firstname"><?php echo $form_labels["form"]["name"]; ?><em class="obrigatorio"> *</em></label>
-					<input type="text" value="<?php echo $form_labels['febraban']['firstname']; ?>" data-checkout="firstname" placeholder="<?php echo $form_labels['form']['name']; ?>" id="firstname" class="form-control-mine" name="mercadopago_ticket[firstname]">
+				<div class="form-col-4" id="box-firstname">
+					<label for="firstname" class="title-name"><?php echo $form_labels['form']['name']; ?><em class="obrigatorio"> *</em></label>
+					<label for="firstname" class="title-razao-social"><?php echo $form_labels['form']['socialName']; ?><em class="obrigatorio"> *</em></label>
+					<input type="text" value="<?php echo $form_labels['febraban']['firstname']; ?>"
+						id="firstname" class="form-control-mine" name="mercadopago_ticket[firstname]">
+					<span class="erro_febraban" data-main="#firstname" id="error_firstname"><?php echo $form_labels["error"]["FEB001"]; ?></span>
 				</div>
-				<div class="form-col-4">
-					<label  for="lastname"><?php echo $form_labels["form"]["surname"]; ?><em class="obrigatorio"> *</em></label>
-					<input type="text" value="<?php echo $form_labels['febraban']['lastname']; ?>" data-checkout="lastname" placeholder="<?php echo $form_labels['form']['surname']; ?>" id="lastname" class="form-control-mine" name="mercadopago_ticket[lastname]">
+				<div class="form-col-4" id="box-lastname">
+					<label for="lastname"><?php echo $form_labels["form"]["surname"]; ?><em class="obrigatorio"> *</em></label>
+					<input type="text" value="<?php echo $form_labels['febraban']['lastname']; ?>"
+						id="lastname" class="form-control-mine" name="mercadopago_ticket[lastname]">
+					<span class="erro_febraban" data-main="#lastname" id="error_lastname"><?php echo $form_labels["error"]["FEB002"]; ?></span>
 				</div>
-				<div class="form-col-4">
-					<label for="docNumber"><?php echo $form_labels["form"]["docNumber"]; ?><em class="obrigatorio"> *</em></label>
-					<input type="text" placeholder="<?php echo $form_labels['form']['docNumber']; ?>" class="form-control-mine" maxlength="11" id="docNumber"
-						onkeydown="return (event.which >= 48 && event.which <= 57) || event.which == 8 || event.which == 46"
-						data-checkout="docNumber" value="<?php echo $form_labels['febraban']['docNumber']; ?>" name="mercadopago_ticket[docNumber]">
+				<div class="form-col-4" id="box-docnumber">
+					<label for="cpfcnpj" class="title-cpf"><?php echo $form_labels['form']['docNumber']; ?><em class="obrigatorio"> *</em></label>
+					<label for="cpfcnpj" class="title-cnpj"><?php echo $form_labels['form']['docNumberLegal']; ?><em class="obrigatorio"> *</em></label>
+					<input type="text" value="<?php echo $form_labels['febraban']['docNumber']; ?>"
+						id="cpfcnpj" class="form-control-mine" name="mercadopago_ticket[docNumber]">
+					<span class="erro_febraban" data-main="#cpfcnpj" id="error_docNumber"><?php echo $form_labels["error"]["FEB003"]; ?></span>
 				</div>
 			</div>
-			<span class="erro_febraban" data-main="#firstname" id="error_firstname"><?php echo $form_labels["error"]["FEB001"]; ?></span>
-			<span class="erro_febraban" data-main="#lastname" id="error_lastname"><?php echo $form_labels["error"]["FEB002"]; ?></span>
-			<span class="erro_febraban" data-main="#docNumber" id="error_docNumber"><?php echo $form_labels["error"]["FEB003"]; ?></span>
 			<div class="form-row">
-				<div class="form-col-9">
+				<div class="form-col-8">
 					<label for="address"><?php echo $form_labels["form"]["address"]; ?><em class="obrigatorio"> *</em></label>
-					<input type="text" value="<?php echo $form_labels['febraban']['address']; ?>" data-checkout="address" placeholder="<?php echo $form_labels['form']['address']; ?>" id="address" class="form-control-mine" name="mercadopago_ticket[address]">
+					<input type="text" value="<?php echo $form_labels['febraban']['address']; ?>"
+						id="address" class="form-control-mine" name="mercadopago_ticket[address]">
+					<span class="erro_febraban" data-main="#address" id="error_address"><?php echo $form_labels["error"]["FEB004"]; ?></span>
 				</div>
-				<div class="form-col-3">
+				<div class="form-col-4">
 					<label for="number"><?php echo $form_labels["form"]["number"]; ?><em class="obrigatorio"> *</em></label>
-					<input type="text" value="<?php echo $form_labels['febraban']['number']; ?>" data-checkout="number" placeholder="<?php echo $form_labels['form']['number']; ?>" id="number"
-						onkeydown="return (event.which >= 48 && event.which <= 57) || event.which == 8 || event.which == 46"
-						class="form-control-mine" name="mercadopago_ticket[number]">
+					<input type="text" value="<?php echo $form_labels['febraban']['number']; ?>"
+						id="number" class="form-control-mine" name="mercadopago_ticket[number]">
+					<span class="erro_febraban" data-main="#number" id="error_number"><?php echo $form_labels["error"]["FEB005"]; ?></span>
 				</div>
 			</div>
-			<span class="erro_febraban" data-main="#address" id="error_address"><?php echo $form_labels["error"]["FEB004"]; ?></span>
-			<span class="erro_febraban" data-main="#number" id="error_number"><?php echo $form_labels["error"]["FEB005"]; ?></span>
 			<div class="form-row">
 				<div class="form-col-4">
 					<label for="city"><?php echo $form_labels["form"]["city"]; ?><em class="obrigatorio"> *</em></label>
-					<input type="text" value="<?php echo $form_labels['febraban']['city']; ?>" data-checkout="city" placeholder="<?php echo $form_labels['form']['city']; ?>" id="city" class="form-control-mine" name="mercadopago_ticket[city]">
+					<input type="text" value="<?php echo $form_labels['febraban']['city']; ?>"
+						id="city" class="form-control-mine" name="mercadopago_ticket[city]">
+					<span class="erro_febraban" data-main="#city" id="error_city"><?php echo $form_labels["error"]["FEB006"]; ?></span>
 				</div>
 				<div class="form-col-4">
 					<label for="state"><?php echo $form_labels["form"]["state"]; ?><em class="obrigatorio"> *</em></label>
-					<select name="mercadopago_ticket[state]" id="state" data-checkout="state" class="form-control-mine">
-						<option value="" <?php if ($form_labels["febraban"]["state"] == "") {echo 'selected="selected"';} ?>><?php echo $form_labels["form"]["select"]; ?></option>
+					<select name="mercadopago_ticket[state]" id="state" class="form-control-mine" style="width: 100%;">
+						<option value="" <?php if ($form_labels["febraban"]["state"] == "") {echo 'selected="selected"';} ?>><?php echo $form_labels["form"]["label_choose"]; ?></option>
 						<option value="AC" <?php if ($form_labels["febraban"]['state'] == "AC") {echo 'selected="selected"';} ?>>Acre</option>
 						<option value="AL" <?php if ($form_labels["febraban"]["state"] == "AL") {echo 'selected="selected"';} ?>>Alagoas</option>
 						<option value="AP" <?php if ($form_labels["febraban"]["state"] == "AP") {echo 'selected="selected"';} ?>>Amapá</option>
@@ -122,18 +139,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<option value="SE" <?php if ($form_labels["febraban"]["state"] == "SE") {echo 'selected="selected"';} ?>>Sergipe</option>
 						<option value="TO" <?php if ($form_labels["febraban"]["state"] == "TO") {echo 'selected="selected"';} ?>>Tocantins</option>
 					</select>
+					<span class="erro_febraban" data-main="#state" id="error_state"><?php echo $form_labels["error"]["FEB007"]; ?></span>
 				</div>
 				<div class="form-col-4">
 					<label for="zipcode"><?php echo $form_labels["form"]["zipcode"]; ?><em class="obrigatorio"> *</em></label>
-					<input type="text" value="<?php echo $form_labels['febraban']['zipcode']; ?>" data-checkout="zipcode"
-						placeholder="<?php echo $form_labels['form']['zipcode']; ?>" id="zipcode"
-						onkeydown="return (event.which >= 48 && event.which <= 57) || event.which == 8 || event.which == 46"
-						class="form-control-mine" name="mercadopago_ticket[zipcode]">
+					<input type="text" value="<?php echo $form_labels['febraban']['zipcode']; ?>"
+						id="zipcode" class="form-control-mine" name="mercadopago_ticket[zipcode]"
+						onkeydown="return (event.which >= 48 && event.which <= 57) || event.which == 8 || event.which == 46">
+					<span class="erro_febraban" data-main="#zipcode" id="error_zipcode"><?php echo $form_labels["error"]["FEB008"]; ?></span>
 				</div>
 			</div>
-			<span class="erro_febraban" data-main="#city" id="error_city"><?php echo $form_labels["error"]["FEB006"]; ?></span>
-			<span class="erro_febraban" data-main="#state" id="error_state"><?php echo $form_labels["error"]["FEB007"]; ?></span>
-			<span class="erro_febraban" data-main="#zipcode" id="error_zipcode"><?php echo $form_labels["error"]["FEB008"]; ?></span>
 			<div class="form-col-12">
 				<label>
 					<span class="mensagem-febraban"><em class="obrigatorio">* </em><?php echo $form_labels["form"]["febraban_rules"]; ?></span>
@@ -251,10 +266,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 				// payment method and checkout
 				paymentMethodId: "#paymentMethodId",
 				amount: "#amountTicket",
+				// other rules
+				boxFirstName: "#box-firstname",
+				boxLastName: "#box-lastname",
+				boxDocNumber: "#box-docnumber",
+				titleFirstName: ".title-name",
+				titleFirstNameRazaoSocial: ".title-razao-social",
+				titleDocNumber: ".title-cpf",
+				titleDocNumberCNPJ: ".title-cnpj",
+				radioTypeFisica: '#MPv1Ticket-docType-fisica',
+				radioTypeJuridica: '#MPv1Ticket-docType-juridica',
 				// febraban
 				firstname: "#febrabanFirstname",
 				lastname: "#febrabanLastname",
-				docNumber: "#febrabanDocNumber",
+				cpfcnpj: "#cpfcnpj",
 				address: "#febrabanAddress",
 				number: "#febrabanNumber",
 				city: "#febrabanCity",
@@ -584,6 +609,160 @@ if ( ! defined( 'ABSPATH' ) ) {
 			return;
 		}
 
+		MPv1Ticket.actionsMLB = function() {
+			MPv1Ticket.initializeDocumentPessoaFisica();
+			MPv1Ticket.addListenerEvent(document.querySelector(MPv1Ticket.selectors.cpfcnpj), 'keyup', MPv1Ticket.execFormatDocument);
+			MPv1Ticket.addListenerEvent(document.querySelector(MPv1Ticket.selectors.radioTypeFisica), "change", MPv1Ticket.initializeDocumentPessoaFisica);
+			MPv1Ticket.addListenerEvent(document.querySelector(MPv1Ticket.selectors.radioTypeJuridica), "change", MPv1Ticket.initializeDocumentPessoaJuridica);
+			return;
+		}
+
+		MPv1Ticket.initializeDocumentPessoaFisica = function() {
+			// show elements
+			document.querySelector(MPv1Ticket.selectors.boxLastName).style.display = "block";
+			document.querySelector(MPv1Ticket.selectors.titleFirstName).style.display = "block";
+			document.querySelector(MPv1Ticket.selectors.titleDocNumber).style.display = "block";
+			// adjustment css
+			document.querySelector(MPv1Ticket.selectors.boxFirstName).classList.remove("form-col-8");
+			document.querySelector(MPv1Ticket.selectors.boxFirstName).classList.add("form-col-4");
+			// hide elements
+			document.querySelector(MPv1Ticket.selectors.titleFirstNameRazaoSocial).style.display = "none";
+			document.querySelector(MPv1Ticket.selectors.titleDocNumberCNPJ).style.display = "none";
+			// force max length CPF
+			document.querySelector(MPv1Ticket.selectors.cpfcnpj).maxLength = 14;
+		}
+
+		MPv1Ticket.initializeDocumentPessoaJuridica = function() {
+			// show elements
+			document.querySelector(MPv1Ticket.selectors.titleFirstNameRazaoSocial).style.display = "block";
+			document.querySelector(MPv1Ticket.selectors.titleDocNumberCNPJ).style.display = "block";
+			// adjustment css
+			document.querySelector(MPv1Ticket.selectors.boxFirstName).classList.remove("form-col-4");
+			document.querySelector(MPv1Ticket.selectors.boxFirstName).classList.add("form-col-8");
+			// Hide Elements
+			document.querySelector(MPv1Ticket.selectors.boxLastName).style.display = "none";
+			document.querySelector(MPv1Ticket.selectors.titleFirstName).style.display = "none";
+			document.querySelector(MPv1Ticket.selectors.titleDocNumber).style.display = "none";
+			// force max length CNPJ
+			document.querySelector(MPv1Ticket.selectors.cpfcnpj).maxLength = 18;
+		}
+
+		MPv1Ticket.validaCPF = function(strCPF) {
+			var Soma;
+			var Resto;
+			strCPF = strCPF.replace(/[.-\s]/g, "")
+			Soma = 0;
+			if (strCPF == "00000000000") {
+				return false;
+			}
+			for (i=1; i<=9; i++) {
+				Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+			}
+			Resto = (Soma * 10) % 11;
+			if ((Resto == 10) || (Resto == 11)) {
+				Resto = 0;
+			}
+			if (Resto != parseInt(strCPF.substring(9, 10)) ) {
+				return false;
+			}
+			Soma = 0;
+			for (i = 1; i <= 10; i++){
+				Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+			}
+			Resto = (Soma * 10) % 11;
+			if ((Resto == 10) || (Resto == 11)) {
+				Resto = 0;
+			}
+			if 	(Resto != parseInt(strCPF.substring(10, 11) ) ) {
+				return false;
+			}
+			return true;
+		}
+
+		MPv1Ticket.validaCNPJ = function(strCNPJ) {
+			strCNPJ = strCNPJ.replace(".","");
+			strCNPJ = strCNPJ.replace(".","");
+			strCNPJ = strCNPJ.replace(".","");
+			strCNPJ = strCNPJ.replace("-","");
+			strCNPJ = strCNPJ.replace("/","");
+			var numeros, digitos, soma, i, resultado, pos, tamanho, digitos_iguais;
+			digitos_iguais = 1;
+			if (strCNPJ.length < 14 && strCNPJ.length < 15) {
+				return false;
+			}
+			for (i = 0; i < strCNPJ.length - 1; i++) {
+				if (strCNPJ.charAt(i) != strCNPJ.charAt(i + 1)) {
+					digitos_iguais = 0;
+					break;
+				}
+			}
+			if (!digitos_iguais) {
+				tamanho = strCNPJ.length - 2
+				numeros = strCNPJ.substring(0,tamanho);
+				digitos = strCNPJ.substring(tamanho);
+				soma = 0;
+				pos = tamanho - 7;
+				for (i = tamanho; i >= 1; i--) {
+					soma += numeros.charAt(tamanho - i) * pos--;
+					if (pos < 2) {
+						pos = 9;
+					}
+				}
+				resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+				if (resultado != digitos.charAt(0)) {
+					return false;
+				}
+				tamanho = tamanho + 1;
+				numeros = strCNPJ.substring(0,tamanho);
+				soma = 0;
+				pos = tamanho - 7;
+				for (i = tamanho; i >= 1; i--) {
+					soma += numeros.charAt(tamanho - i) * pos--;
+					if (pos < 2) {
+						pos = 9;
+					}
+				}
+				resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+				if (resultado != digitos.charAt(1)) {
+					return false;
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		MPv1Ticket.execFormatDocument = function() {
+			v_obj= this;
+			setTimeout(function() {
+				v_obj.value = MPv1Ticket.formatDocument(v_obj.value)
+			}, 1)
+		}
+
+		MPv1Ticket.formatDocument = function(v) {
+			//Remove tudo o que não é dígito
+			v=v.replace(/\D/g,"")
+			if (document.querySelector(MPv1Ticket.selectors.radioTypeFisica).checked) { //CPF
+				//Coloca um ponto entre o terceiro e o quarto dígitos
+				v=v.replace(/(\d{3})(\d)/,"$1.$2")
+				//Coloca um ponto entre o terceiro e o quarto dígitos
+				//de novo (para o segundo bloco de números)
+				v=v.replace(/(\d{3})(\d)/,"$1.$2")
+				//Coloca um hífen entre o terceiro e o quarto dígitos
+				v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+				} else { //CNPJ
+				//Coloca ponto entre o segundo e o terceiro dígitos
+				v=v.replace(/^(\d{2})(\d)/, "$1.$2")
+				//Coloca ponto entre o quinto e o sexto dígitos
+				v=v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+				//Coloca uma barra entre o oitavo e o nono dígitos
+				v=v.replace(/\.(\d{3})(\d)/, ".$1/$2")
+				//Coloca um hífen depois do bloco de quatro dígitos
+				v=v.replace(/(\d{4})(\d)/, "$1-$2")
+			}
+			return v
+		}
+
 		// ===
 
 		MPv1Ticket.Initialize = function( site_id, coupon_mode, discount_action_url, payer_email ) {
@@ -606,7 +785,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			}
 
 			// flow: MLB
-			if (MPv1Ticket.site_id != "MLB") {
+			if (MPv1Ticket.site_id == "MLB") {
+				MPv1Ticket.actionsMLB();
+			}
+			/*if (MPv1Ticket.site_id != "MLB") {
 				document.querySelector(MPv1Ticket.selectors.formTicket).style.display = "none";
 			} else {
 				MPv1Ticket.addListenerEvent(
@@ -614,7 +796,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					"submit",
 					MPv1Ticket.validateInputsTicket
 				);
-			}
+			}*/
 
 			return;
 

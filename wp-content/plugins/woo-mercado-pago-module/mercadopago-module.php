@@ -8,7 +8,7 @@
  * Author URI: https://www.mercadopago.com.br/developers/
  * Developer: Marcelo Tomio Hama / marcelo.hama@mercadolivre.com
  * Copyright: Copyright(c) MercadoPago [https://www.mercadopago.com]
- * Version: 2.2.11
+ * Version: 2.2.16
  * License: https://www.gnu.org/licenses/gpl.html GPL version 2 or higher
  * Text Domain: woocommerce-mercadopago-module
  * Domain Path: /languages/
@@ -31,7 +31,8 @@ if ( ! class_exists( 'WC_WooMercadoPago_Module' ) ) :
 	 */
 	class WC_WooMercadoPago_Module {
 
-		const VERSION = '2.2.11';
+		const VERSION = '2.2.16';
+		const MIN_PHP = 5.6;
 
 		// Singleton design pattern
 		protected static $instance = null;
@@ -206,6 +207,8 @@ if ( ! class_exists( 'WC_WooMercadoPago_Module' ) ) :
 			$store_categories_description = array();
 
 			// Get Mercado Pago store categories.
+			$email = ( wp_get_current_user()->ID != 0 ) ? wp_get_current_user()->user_email : null;
+			MPRestClient::set_email( $email );
 			$categories = MPRestClient::get(
 				array( 'uri' => '/item_categories' ),
 				WC_WooMercadoPago_Module::get_module_version()
@@ -232,6 +235,8 @@ if ( ! class_exists( 'WC_WooMercadoPago_Module' ) ) :
 		 * @return a float that is the rate of conversion.
 		 */
 		public static function get_conversion_rate( $used_currency ) {
+			$email = ( wp_get_current_user()->ID != 0 ) ? wp_get_current_user()->user_email : null;
+			MPRestClient::set_email( $email );
 			$currency_obj = MPRestClient::get(
 				array( 'uri' => '/currency_conversions/search?' .
 					'from=' . get_woocommerce_currency() .

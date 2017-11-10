@@ -20,6 +20,28 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 
 	public function __construct( $is_instance = false ) {
 
+		// Creating PHP version message.
+		$min_php_message = phpversion() >= WC_WooMercadoPago_Module::MIN_PHP ?
+			'<img width="14" height="14" src="' . plugins_url( 'images/check.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'Your PHP version is OK.', 'woocommerce-mercadopago-module' ) :
+			'<img width="14" height="14" src="' . plugins_url( 'images/error.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			sprintf(
+				__( 'Your PHP version do not support this module. You have %s, minimal required is %s.', 'woocommerce-mercadopago-module' ),
+				phpversion(), WC_WooMercadoPago_Module::MIN_PHP
+			);
+		// Check cURL.
+		$curl_message = in_array( 'curl', get_loaded_extensions() ) ?
+			'<img width="14" height="14" src="' . plugins_url( 'images/check.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'cURL is installed.', 'woocommerce-mercadopago-module' ) :
+			'<img width="14" height="14" src="' . plugins_url( 'images/error.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'cURL is not installed.', 'woocommerce-mercadopago-module' );
+		// Check SSL.
+		$is_ssl_message = empty( $_SERVER['HTTPS'] ) || $_SERVER['HTTPS'] == 'off' ?
+			'<img width="14" height="14" src="' . plugins_url( 'images/warning.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'SSL is missing in your site.', 'woocommerce-mercadopago-module' ) :
+			'<img width="14" height="14" src="' . plugins_url( 'images/check.png', plugin_dir_path( __FILE__ ) ) . '"> ' .
+			__( 'Your site has SSL enabled.', 'woocommerce-mercadopago-module' );
+
 		// Mercado Pago fields.
 		$this->mp = null;
 		$this->site_id = null;
@@ -44,7 +66,10 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 				plugin_dir_path( __FILE__ )
 			) . '"><br><br>' . '<strong>' .
 			__( 'This module enables WooCommerce to use Mercado Pago as payment method for purchases made in your virtual store.', 'woocommerce-mercadopago-module' ) .
-			'</strong>';
+			'</strong>' . '<br><br>' .
+			$min_php_message . '<br>' .
+			$is_ssl_message . '<br>' .
+			$curl_message;
 
 		// Fields used in Mercado Pago Module configuration page.
 		$this->public_key = $this->get_option( 'public_key' );
@@ -395,10 +420,13 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 		}
 
 		if ( ! empty( $this->settings['public_key'] ) && ! empty( $this->settings['access_token'] ) ) {
+			$email = ( wp_get_current_user()->ID != 0 ) ? wp_get_current_user()->user_email : null;
 			$this->mp = new MP(
 				WC_WooMercadoPago_Module::get_module_version(),
 				$this->settings['access_token']
 			);
+			$email = ( wp_get_current_user()->ID != 0 ) ? wp_get_current_user()->user_email : null;
+			$this->mp->set_email( $email );
 		} else {
 			$this->mp = null;
 		}
@@ -732,11 +760,10 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 					'document_number' => __( 'Document number', 'woocommerce-mercadopago-module' ),
 					'issuer' => __( 'Issuer', 'woocommerce-mercadopago-module' ),
 					'installments' => __( 'Installments', 'woocommerce-mercadopago-module' )
-			),
-			'error' => array(
+				),
+				'error' => array(
 					// Card number.
-					'205' =>
-						__( 'Parameter cardNumber can not be null/empty', 'woocommerce-mercadopago-module' ),
+					'205' => __( 'Parameter cardNumber can not be null/empty', 'woocommerce-mercadopago-module' ),
 					'E301' => __( 'Invalid Card Number', 'woocommerce-mercadopago-module' ),
 					// Expiration date.
 					'208' => __( 'Invalid Expiration Date', 'woocommerce-mercadopago-module' ),
@@ -744,27 +771,22 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 					'325' => __( 'Invalid Expiration Date', 'woocommerce-mercadopago-module' ),
 					'326' => __( 'Invalid Expiration Date', 'woocommerce-mercadopago-module' ),
 					// Card holder name.
-					'221' =>
-						__( 'Parameter cardholderName can not be null/empty', 'woocommerce-mercadopago-module' ),
+					'221' => __( 'Parameter cardholderName can not be null/empty', 'woocommerce-mercadopago-module' ),
 					'316' => __( 'Invalid Card Holder Name', 'woocommerce-mercadopago-module' ),
 					// Security code.
-					'224' =>
-						__( 'Parameter securityCode can not be null/empty', 'woocommerce-mercadopago-module' ),
+					'224' => __( 'Parameter securityCode can not be null/empty', 'woocommerce-mercadopago-module' ),
 					'E302' => __( 'Invalid Security Code', 'woocommerce-mercadopago-module' ),
 					// Doc type.
-					'212' =>
-						__( 'Parameter docType can not be null/empty', 'woocommerce-mercadopago-module' ),
+					'212' => __( 'Parameter docType can not be null/empty', 'woocommerce-mercadopago-module' ),
 					'322' => __( 'Invalid Document Type', 'woocommerce-mercadopago-module' ),
 					// Doc number.
-					'214' =>
-						__( 'Parameter docNumber can not be null/empty', 'woocommerce-mercadopago-module' ),
+					'214' => __( 'Parameter docNumber can not be null/empty', 'woocommerce-mercadopago-module' ),
 					'324' => __( 'Invalid Document Number', 'woocommerce-mercadopago-module' ),
 					// Doc sub type.
 					'213' => __( 'The parameter cardholder.document.subtype can not be null or empty', 'woocommerce-mercadopago-module' ),
 					'323' => __( 'Invalid Document Sub Type', 'woocommerce-mercadopago-module' ),
 					// Issuer.
-					'220' =>
-						__( 'Parameter cardIssuerId can not be null/empty', 'woocommerce-mercadopago-module' )
+					'220' => __( 'Parameter cardIssuerId can not be null/empty', 'woocommerce-mercadopago-module' )
 				)
 			)
 		);
@@ -855,7 +877,7 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 			isset( $custom_checkout['installments'] ) && ! empty( $custom_checkout['installments'] ) &&
 			$custom_checkout['installments'] != -1 ) {
 
-			$response = self::create_url( $order, $custom_checkout );
+			$response = $this->create_url( $order, $custom_checkout );
 
 			if ( array_key_exists( 'status', $response ) ) {
 				switch ( $response['status'] ) {
@@ -928,6 +950,18 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 					default:
 						break;
 				}
+			} else {
+				// Process when fields are imcomplete.
+				wc_add_notice(
+					'<p>' .
+						__( 'A problem was occurred when processing your payment. Are you sure you have correctly filled all information in the checkout form?', 'woocommerce-mercadopago-module' ) . ' MERCADO PAGO: ' . $response .
+					'</p>',
+					'error'
+				);
+				return array(
+					'result' => 'fail',
+					'redirect' => '',
+				);
 			}
 		} else {
 			// Process when fields are imcomplete.
@@ -1262,7 +1296,7 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 						'[create_url] - mercado pago gave error, payment creation failed with error: ' .
 						$checkout_info['response']['message'] );
 				}
-				return false;
+				return $checkout_info['response']['message'];
 			} elseif ( is_wp_error( $checkout_info ) ) {
 				// WordPress throwed an error.
 				if ( 'yes' == $this->debug ) {
@@ -1271,7 +1305,7 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 						'[create_url] - wordpress gave error, payment creation failed with error: ' .
 						$checkout_info['response']['message'] );
 				}
-				return false;
+				return $checkout_info['response']['message'];
 			} else {
 				// Obtain the URL.
 				if ( 'yes' == $this->debug ) {
@@ -1291,7 +1325,7 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 					json_encode( array( 'status' => $e->getCode(), 'message' => $e->getMessage() ) )
 				);
 			}
-			return false;
+			return $e->getMessage();
 		}
 	}
 
@@ -1384,7 +1418,7 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 				$woocommerce->cart->add_fee( sprintf(
 					__( 'Discount for %s coupon', 'woocommerce-mercadopago-module' ),
 					esc_attr( $mercadopago_custom['campaign']
-					) ), ( $value * -1 ), true
+					) ), ( $value * -1 ), false
 				);
 			}
 		}
@@ -1447,6 +1481,8 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 				WC_WooMercadoPago_Module::get_module_version(),
 				$this->access_token
 			);
+			$email = ( wp_get_current_user()->ID != 0 ) ? wp_get_current_user()->user_email : null;
+			$this->mp->set_email( $email );
 			$get_request = $this->mp->get(
 				'/users/me?access_token=' . $this->access_token
 			);
@@ -1887,6 +1923,7 @@ class WC_WooMercadoPagoCustom_Gateway extends WC_Payment_Gateway {
 				);
 				break;
 			case 'cancelled':
+				$this->process_cancel_order_meta_box_actions( $order );
 				$order->update_status(
 					'cancelled',
 					'Mercado Pago: ' .
