@@ -316,4 +316,20 @@ dl.variation{
 .slick-prev:before, .slick-next:before{
 	color: $black;
 }
+
+.woocommerce a.remove{
+	color: $black !important;
+	font-family: 'Futura';
+	font-weight: 400;
+	border: solid 2px;
+	border-color: transparent;
+	height: 0.9em;
+    width: 0.9em;
+    line-height: 0.8em;
+	&:hover{
+		color: $black !important;
+		background: transparent;
+		border-color: $black;
+	}
+}
 /* end recet for slick carousel  */
