@@ -230,3 +230,10 @@ function my_header_add_to_cart_fragment( $fragments ) {
      
     return $fragments;
 }
+
+add_action( 'wp_print_scripts', 'muss_de_script', 100 );
+function muss_de_script() {
+    wp_dequeue_script( 'wc-cart-fragments' );
+
+    return true;
+}
