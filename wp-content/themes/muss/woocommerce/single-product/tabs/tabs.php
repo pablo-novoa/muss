@@ -26,13 +26,20 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Each tab is an array containing title, callback and priority.
  * @see woocommerce_default_product_tabs()
  */
-$tabs = apply_filters( 'woocommerce_product_tabs', array() );
-
-if ( ! empty( $tabs ) ) : ?>
-
-<?php 
-	call_user_func( $tabs['description']['callback'], 'description', $tabs['description'] ); 
-?>
 
 
-<?php endif; ?>
+
+/************************************ 
+ 
+ $tabs = apply_filters( 'woocommerce_product_tabs', array() );
+ 
+ if ( ! empty( $tabs ) ) : ?>
+ 
+ <?php 
+ call_user_func( $tabs['description']['callback'], 'description', $tabs['description'] ); 
+ ?>
+ 
+ 
+ <?php endif; ?>
+ 
+ ***********************************/
